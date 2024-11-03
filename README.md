@@ -40,7 +40,7 @@ For seamless development and deployment, the project is managed through GitLab C
 - Average occupancy of flight in comfort class
 
 
-<img src="link"/>
+<img src="https://github.com/PKuziola/flights/blob/main/img/img2.png?raw=true"/>
 
 
 # 🛢 Database Information
@@ -49,7 +49,7 @@ Database is available [here](https://postgrespro.com/community/demodb).<br>
 I used [demo-big-en.zip (232 MB) — flight data for one year (DB size is about 2.5 GB).](https://edu.postgrespro.com/demo-big-en.zip).<br>
 
 ## 🧩 Database Schema<br>
-<img src="link"/>
+<img src="https://github.com/PKuziola/flights/blob/main/img/img1.png"/>
 
 <br>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -118,12 +118,12 @@ Go to login page and login using credentials from superset-init.sh file
 http://localhost:8088/login/
 ```
 In order to connect to Google Big Query you have to create connection in Apache superset<br>
-<img src="link"/>
+<img src="https://github.com/PKuziola/flights/blob/main/img/gif1.gif?raw=true"/>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 📊 Apache Superset Dashboard
-<img src="link"/>
+<img src="https://github.com/PKuziola/flights/blob/main/img/gif2.gif"/>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # 📓 Jupyter Notebook Data Analysis
@@ -143,7 +143,7 @@ Run container:
 ```
 docker run -it -p 8888:8888 -v ${PWD}:/home/jovyan/work jupyter-notebook-spark
 ```
-<img src="link"/>
+<img src="https://github.com/PKuziola/flights/blob/main/img/gif3.gif"/>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
