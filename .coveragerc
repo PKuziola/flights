@@ -1,0 +1,6 @@
+[html]
+directory = test_history
+
+[report]
+exclude lines = 
+    if __name__ = .__main__.:

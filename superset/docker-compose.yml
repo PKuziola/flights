@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  superset:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8088"
+    environment:
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    volumes:
+      - ./superset_config.py:/app/superset_config.py
+      - ./superset-init.sh:/superset-init.sh
+    entrypoint: ["/superset-init.sh"]
