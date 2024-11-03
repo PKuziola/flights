@@ -18,7 +18,7 @@ This project facilitates the comprehensive data processing, analysis, and visual
 
 The architecture incorporates a local database for Jupyter Notebooks and allows Spark to run locally for initial data processing. Processed aggregates are then uploaded to Google BigQuery for efficient storage and querying.
 
-For seamless development and deployment, the project is managed through GitLab CI/CD, ensuring continuous integration, deployment, and rigorous testing, with all tests written using pytest.
+For seamless development and deployment, the project is managed through GitHub Actions CI/CD, ensuring continuous integration, deployment, and rigorous testing, with all tests written using pytest.
 
 # ✅  Pytest test pass
 
