@@ -48,7 +48,7 @@ jobs:
           zip -r ../jobs.zip jobs
 
       - name: Upload zip file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: jobs-zip
           path: jobs.zip
