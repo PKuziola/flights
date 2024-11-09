@@ -61,7 +61,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: jobs
-          path: ./
+          path: ./downloads
 
   google_cloud_services:
     runs-on: ubuntu-latest
@@ -89,6 +89,6 @@ jobs:
       
       - name: Upload files to GCS
         run: |
-          gsutil cp jobs.zip gs://${{ env.BUCKET_NAME }}/jobs.zip
+          gsutil cp ./downloads/jobs.zip gs://${{ env.BUCKET_NAME }}/jobs.zip
           gsutil cp app/main.py gs://${{ env.BUCKET_NAME }}/main.py
           gcloud storage objects update gs://${{ env.BUCKET_NAME }}/main.py --content-type=application/octet-stream
