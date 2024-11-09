@@ -22,7 +22,7 @@ For seamless development and deployment, the project is managed through GitHub A
 
 # ✅  Pytest test pass
 
-? github coverage ?
+<img src="https://github.com/PKuziola/flights/blob/main/img/img3.png?raw=true"/>
 
 # 🧮 Created Aggregates
 
