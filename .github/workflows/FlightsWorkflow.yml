@@ -64,20 +64,33 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Setup GCP Service Account and Authenticate
+      - name: Authenticate with GCP using Service Account
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: ${{ secrets.GCP_ACCOUNT_KEY }}
+
+      - name: Setup GCP with gcloud CLI
         uses: 'google-github-actions/setup-gcloud@v2'
         with:
           project_id: ${{ env.PROJECT_ID }}
-          credentials_json: ${{ secrets.GCP_ACCOUNT_KEY }}
 
       - name: Create GCS bucket if not exists
         run: |
+          echo "Authenticating with GCP..."
+          gcloud auth activate-service-account --key-file="${{ secrets.GCP_ACCOUNT_KEY }}"
+          gcloud config set project ${{ env.PROJECT_ID }}
+          
+          # Check if bucket exists
           if ! gsutil ls -b gs://${{ env.BUCKET_NAME }}/; then
+            echo "Bucket does not exist. Creating bucket..."
             gsutil mb -l EU gs://${{ env.BUCKET_NAME }}/
+          else
+            echo "Bucket exists."
           fi
 
       - name: Upload files to GCS
         run: |
+          echo "Uploading files to GCS..."
           gsutil cp jobs.zip gs://${{ env.BUCKET_NAME }}/jobs.zip
           gsutil cp app/main.py gs://${{ env.BUCKET_NAME }}/main.py
           gcloud storage objects update gs://${{ env.BUCKET_NAME }}/main.py --content-type=application/octet-stream
