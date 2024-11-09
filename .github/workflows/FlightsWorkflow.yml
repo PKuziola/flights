@@ -27,7 +27,7 @@ jobs:
         run: python -m pytest --cov-report=html --cov=app .
 
       - name: Upload test results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: test-history
           path: test_history
