@@ -31,3 +31,24 @@ jobs:
         with:
           name: test-history
           path: test_history
+
+  create_zip:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Install zip
+        run: sudo apt-get install zip
+
+      - name: Create jobs.zip
+        run: |
+          cd app
+          zip -r ../jobs.zip jobs
+
+      - name: Upload zip file
+        uses: actions/upload-artifact@v2
+        with:
+          name: jobs-zip
+          path: jobs.zip
