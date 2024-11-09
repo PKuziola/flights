@@ -6,7 +6,8 @@ on:
       - main
 
 env:
-  PROJECT_ID: "flights-429420" 
+  PROJECT_ID: "flights-429420"
+  BUCKET_NAME: "flights-cicd-bucket"
 
 jobs:
   test:
@@ -66,10 +67,22 @@ jobs:
       - name: Setup GCP Service Account
         uses: google-github-actions/setup-gcloud@main
         with:
-          project_id: "${{ secrets.GCP_PROJECT_ID }}"
+          project_id: $GCP_PROJECT_ID
           service_account_key: ${{ secrets.GCP_ACCOUNT_KEY }}
 
       - name: Authenticate GCP Account
         uses: 'google-github-actions/auth@v2'
         with:
            credentials_json: ${{ secrets.GCP_ACCOUNT_KEY }}
+
+      - name: Create GCS bucket if not exists
+        run: |
+          if ! gsutil ls -b gs://$BUCKET_NAME/; then
+            gsutil mb -l EU gs://$BUCKET_NAME/
+          fi
+
+      - name: Upload files to GCS
+        run: |
+          gsutil cp jobs.zip gs://$BUCKET_NAME/jobs.zip
+          gsutil cp app/main.py gs://$BUCKET_NAME/main.py
+          gcloud storage objects update gs://$BUCKET_NAME/main.py --content-type=application/octet-stream
