@@ -5,8 +5,8 @@ from jobs.functions.functions import (
     create_raw_pyspark_datarame,
     fix_airports_data_df,
     num_of_bookings,
-    revenue,
-    airtime,
+    calculate_revenue,
+    calculate_airtime,
 )
 from jobs.functions.functions import (
     num_of_flights_day_period,
@@ -74,11 +74,11 @@ def get_aggregates(
         spark_df_airports_data,
     )
 
-    revenue_aggregate_df = revenue(
+    revenue_aggregate_df = calculate_revenue(
         spark_df_flights, spark_df_airports_data, spark_df_ticket_flights
     )
 
-    airtime_aggregate_df = airtime(spark_df_flights, spark_df_airports_data)
+    airtime_aggregate_df = calculate_airtime(spark_df_flights, spark_df_airports_data)
 
     flights_day_period_aggregate_df = num_of_flights_day_period(
         spark_df_flights, spark_df_airports_data

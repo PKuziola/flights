@@ -17,7 +17,7 @@ from pyspark.sql.functions import (
     when,
 )
 
-def clean_airports_data_df(spark_df_airports_data):
+def fix_airports_data_df(spark_df_airports_data):
     """
     Extracting english names for city and airport.
 
@@ -77,7 +77,7 @@ def create_raw_pyspark_datarame(spark_df_airports_data, spark_df_flights, spark_
     Returns:
         Pyspark Dataframe containing dates and airports made for joining aggregates.
     """
-    spark_df_airports_data = clean_airports_data_df(spark_df_airports_data)
+    spark_df_airports_data = fix_airports_data_df(spark_df_airports_data)
 
     unique_airports_df = spark_df_airports_data.select("airport_name").distinct()
     dates_flights_df = spark_df_flights.withColumn(
@@ -116,7 +116,7 @@ def num_of_bookings(
     Returns:
         Pyspark Dataframe containing daily number of bookings per airport.
     """
-    spark_df_airports_data = clean_airports_data_df(spark_df_airports_data)
+    spark_df_airports_data = fix_airports_data_df(spark_df_airports_data)
 
     spark_df_bookings = spark_df_bookings.join(
         spark_df_tickets,
@@ -165,7 +165,7 @@ def calculate_revenue(spark_df_flights, spark_df_airports_data, spark_df_ticket_
     Returns:
         Pyspark Dataframe containing daily revenue per airport.
     """
-    spark_df_airports_data = clean_airports_data_df(spark_df_airports_data)
+    spark_df_airports_data = fix_airports_data_df(spark_df_airports_data)
 
     spark_df_flights = spark_df_flights.na.drop(subset=["flight_id"])
     spark_df_flights = spark_df_flights.join(
@@ -215,7 +215,7 @@ def calculate_airtime(spark_df_flights, spark_df_airports_data):
     Returns:
         Pyspark Dataframe containing daily airtime per airport.
     """
-    spark_df_airports_data = clean_airports_data_df(spark_df_airports_data)
+    spark_df_airports_data = fix_airports_data_df(spark_df_airports_data)
 
     spark_df_flights = spark_df_flights.na.drop(subset=["flight_id"])
     spark_df_flights = spark_df_flights.join(
@@ -256,7 +256,7 @@ def num_of_flights_day_period(spark_df_flights, spark_df_airports_data):
     Returns:
         Pyspark Dataframe containing daily flights per airport per day period.
     """
-    spark_df_airports_data = clean_airports_data_df(spark_df_airports_data)
+    spark_df_airports_data = fix_airports_data_df(spark_df_airports_data)
 
     spark_df_flights = spark_df_flights.na.drop(subset=["flight_id"])
     spark_df_flights = spark_df_flights.join(
@@ -322,7 +322,7 @@ def flight_delay(spark_df_flights, spark_df_airports_data):
     Returns:
         Pyspark Dataframe containing daily flight delay per airport.
     """
-    spark_df_airports_data = clean_airports_data_df(spark_df_airports_data)
+    spark_df_airports_data = fix_airports_data_df(spark_df_airports_data)
 
     spark_df_flights = spark_df_flights.join(
         spark_df_airports_data,
@@ -381,7 +381,7 @@ def occupancy(
     Returns:
         Pyspark Dataframe containing daily flight occupancy per airport.
     """
-    spark_df_airports_data = clean_airports_data_df(spark_df_airports_data)
+    spark_df_airports_data = fix_airports_data_df(spark_df_airports_data)
 
     spark_df_flights = spark_df_flights.na.drop(subset=["flight_id"])
 
@@ -453,7 +453,7 @@ def occupancy_fare_class(
         Pyspark Dataframe containing daily flight occupancy per fare class per airport.
     """
     
-    spark_df_airports_data = clean_airports_data_df(spark_df_airports_data)
+    spark_df_airports_data = fix_airports_data_df(spark_df_airports_data)
     
     seats_per_aircraft_economy_class = (
         spark_df_seats.filter(col("fare_conditions") == "Economy")
