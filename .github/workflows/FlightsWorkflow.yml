@@ -61,6 +61,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: jobs
+          path: ./
 
   google_cloud_services:
     runs-on: ubuntu-latest
