@@ -67,7 +67,7 @@ jobs:
       - name: Setup GCP Service Account and Authenticate
         uses: 'google-github-actions/setup-gcloud@v2'
         with:
-          project_id: ${{ env.GCP_PROJECT_ID }}
+          project_id: ${{ env.PROJECT_ID }}
           credentials_json: ${{ secrets.GCP_ACCOUNT_KEY }}
 
       - name: Create GCS bucket if not exists
