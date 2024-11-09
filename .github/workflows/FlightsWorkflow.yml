@@ -77,12 +77,12 @@ jobs:
 
       - name: Create GCS bucket if not exists
         run: |
-          if ! gsutil ls -b gs://$BUCKET_NAME/; then
-            gsutil mb -l EU gs://$BUCKET_NAME/
+          if ! gsutil ls -b gs://${{ env.BUCKET_NAME }}/; then
+            gsutil mb -l EU gs://${{ env.BUCKET_NAME }}/
           fi
 
       - name: Upload files to GCS
         run: |
-          gsutil cp jobs.zip gs://$BUCKET_NAME/jobs.zip
-          gsutil cp app/main.py gs://$BUCKET_NAME/main.py
-          gcloud storage objects update gs://$BUCKET_NAME/main.py --content-type=application/octet-stream
+          gsutil cp jobs.zip gs://${{ env.BUCKET_NAME }}/jobs.zip
+          gsutil cp app/main.py gs://${{ env.BUCKET_NAME }}/main.py
+          gcloud storage objects update gs://${{ env.BUCKET_NAME }}/main.py --content-type=application/octet-stream
