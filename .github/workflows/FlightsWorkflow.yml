@@ -71,4 +71,4 @@ jobs:
           echo "${{ secrets.GCP_ACCOUNT_KEY }}" > gcloud-service-key.json
           gcloud auth activate-service-account --key-file gcloud-service-key.json
           rm gcloud-service-key.json
-          gcloud config set project "${{ env.PROJECT_ID }"
+          gcloud config set project "${{ env.PROJECT_ID }}"
