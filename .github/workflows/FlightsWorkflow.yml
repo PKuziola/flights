@@ -54,7 +54,7 @@ jobs:
       - name: Upload zip file
         uses: actions/upload-artifact@v3
         with:
-          name: jobs-zip
+          name: jobs
           path: jobs.zip
 
   google_cloud_services:
