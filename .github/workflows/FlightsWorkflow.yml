@@ -105,6 +105,3 @@ jobs:
             --py-files=gs://$BUCKET_NAME/jobs.zip \
             --service-account=flights-service-acc-new@$PROJECT_ID.iam.gserviceaccount.com \
             --subnet=my-new-subnet
-        env:
-          BUCKET_NAME: ${{ env.BUCKET_NAME }}
-          PROJECT_ID: ${{ env.PROJECT_ID }}
