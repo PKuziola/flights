@@ -93,3 +93,18 @@ jobs:
           gsutil cp ./downloads/jobs.zip gs://${{ env.BUCKET_NAME }}/jobs.zip
           gsutil cp app/main.py gs://${{ env.BUCKET_NAME }}/main.py
           gcloud storage objects update gs://${{ env.BUCKET_NAME }}/main.py --content-type=application/octet-stream
+
+
+      - name: Submit Dataproc PySpark job
+        run: |
+          gcloud dataproc batches submit pyspark gs://$BUCKET_NAME/main.py \
+            --project=$PROJECT_ID \
+            --region=us-central1 \
+            --batch=flights-batch-$(date +"%Y%m%d-%H%M%S") \
+            --version=2.2 \
+            --py-files=gs://$BUCKET_NAME/jobs.zip \
+            --service-account=flights-service-acc-new@$PROJECT_ID.iam.gserviceaccount.com \
+            --subnet=my-new-subnet
+        env:
+          BUCKET_NAME: ${{ env.BUCKET_NAME }}
+          PROJECT_ID: ${{ env.PROJECT_ID }}
