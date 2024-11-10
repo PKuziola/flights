@@ -57,11 +57,6 @@ jobs:
           name: jobs
           path: jobs.zip
 
-      - name: Download zip file artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: jobs
-          path: ./downloads
 
   google_cloud_services:
     runs-on: ubuntu-latest
@@ -69,6 +64,12 @@ jobs:
     steps:
 
       - uses: actions/checkout@v3
+
+      - name: Download zip file artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: jobs
+          path: ./downloads
       
       - name: Authenticate with GCP using Service Account
         uses: 'google-github-actions/auth@v2'
