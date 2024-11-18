@@ -243,14 +243,17 @@ def run_job(spark):
     Returns:
         None
     """
-    data_upload(
-        get_aggregates(
-            table_load(spark, "aircrafts_data"),
-            table_load(spark, "airports_data"),
-            table_load(spark, "bookings"),
-            table_load(spark, "flights"),
-            table_load(spark, "seats"),
-            table_load(spark, "ticket_flights_v1"),
-            table_load(spark, "tickets"),
-        )
+    aircrafts = table_load(spark, "aircrafts_data")
+    airports = table_load(spark, "airports_data")
+    bookings = table_load(spark, "bookings")
+    flights = table_load(spark, "flights")
+    seats = table_load(spark, "seats")
+    tickets_flights = table_load(spark, "ticket_flights_v1")
+    tickets = table_load(spark, "tickets")
+    
+    aggregated_data = get_aggregates(    
+        aircrafts, airports, bookings, 
+        flights, seats, tickets_flights, tickets
     )
+    
+    data_upload(aggregated_data)
