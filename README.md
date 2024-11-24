@@ -149,6 +149,8 @@ docker run -it -p 8888:8888 -v ${PWD}:/home/jovyan/work jupyter-notebook-spark
 
 # 🔑Setup
 
+Remember to add GCP service accout .json key as secret to authenticate Google Cloud Platform.
+
 In order to have the job running on the GCP you have to do the following
 
 **Have service account with required permissions, you need following roles:**
